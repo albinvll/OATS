@@ -11,8 +11,8 @@ BEGIN
 		,@IdLLojiTekstitInput
 		)
 
-	SELECT MAX(Id)
-	FROM TextToSummarizeHeader AS Id
+	SELECT MAX(Id) as Id
+	FROM TextToSummarizeHeader
 END
 
 CREATE PROCEDURE TextToSummarizeDetailsInsert_sp (
@@ -83,12 +83,5 @@ BEGIN
 		,H.DataERegjistrimit
 	FROM TextToSummarizeHeader H
 	INNER JOIN TextToSummarizeDetails D ON H.Id = D.IdHeader
-	WHERE (
-			@Id = H.Id
-			OR @Id IS NULL
-			)
-		AND (
-			@IdPerdoruesi = H.IdPerdoruesi
-			OR @IdPerdoruesi IS NULL
-			)
+	WHERE @IdPerdoruesi = H.IdPerdoruesi
 END

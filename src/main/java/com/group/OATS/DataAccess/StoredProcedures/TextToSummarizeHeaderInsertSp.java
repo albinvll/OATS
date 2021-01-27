@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Types;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -29,11 +30,11 @@ public class TextToSummarizeHeaderInsertSp extends StoredProcedure {
         compile();
     }
 
-    public Integer insertTextToSummarizeDetails(TextToSummarizeHeader textToSummarizeHeader){
+    public List<Integer> insertTextToSummarizeDetails(TextToSummarizeHeader textToSummarizeHeader){
         final Map<String, Object> map = new HashMap<>();
         map.put("IdPerdoruesi", textToSummarizeHeader.getIdPerdoruesi());
-        map.put("IdLLojiTekstitInput",textToSummarizeHeader.getIdLlojiTekstitOutput());
-        return (Integer)super.execute(map).get(RESULT);
+        map.put("IdLLojiTekstitInput",textToSummarizeHeader.getIdLlojiTekstitInput());
+        return (List<Integer>)super.execute(map).get(RESULT);
 
     }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MDBCard, MDBCardBody, MDBInput, MDBIcon, MDBBtn } from 'mdbreact';
 import "./register.css"
 import axios from 'axios';
+import { ToastsContainer, ToastsContainerPosition, ToastsStore } from 'react-toasts';
 
 export class Register extends Component{
 
@@ -64,6 +65,7 @@ export class Register extends Component{
                         </div>
                         <div  className="text-center">
 							<button id="register-button" onClick={(e) => this.attemptRegistration(e)}>Register</button>
+                            <button id="register-button" onClick={(e) => this.backToLogin(e)}>Back to login</button>
 						</div>
                     </MDBCardBody>
                 </MDBCard>
@@ -72,9 +74,31 @@ export class Register extends Component{
         );
     }
 
+    backToLogin(e){
+        e.preventDefault();
+        this.props.history.push("/logout");
+    }
+
     attemptRegistration = async (event) =>{
         event.preventDefault();
-        console.log("test test");
+        if(!this.state.email || this.state.email?.length <= 0){
+			ToastsStore.error("Please type your email");
+			return;
+		}
+		if(!this.state.password || this.state.password?.length <= 0){
+			ToastsStore.error("Please type your password");
+			return;
+        }
+        
+        if(!this.state.name || this.state.name?.length <= 0){
+			ToastsStore.error("Please type your name");
+			return;
+		}
+		if(!this.state.surname || this.state.surname?.length <= 0){
+			ToastsStore.error("Please type your surname");
+			return;
+		}
+
         const response = await axios.post("http://localhost:8080/api/login/register",
             {
                 id:null,
@@ -85,7 +109,9 @@ export class Register extends Component{
                 idSubscription: this.state.radio
             }
         );
-        console.log(response);
+        if(response){
+            this.props.history.push("/login");
+        }
     }
 
     handleNameChange=(event)=>{
@@ -113,6 +139,7 @@ export class Register extends Component{
     render(){
         return(
             <>
+                <ToastsContainer store={ToastsStore} position={ToastsContainerPosition.TOP_RIGHT} />
                 {this.showRegisterForm()}
             </>
         )

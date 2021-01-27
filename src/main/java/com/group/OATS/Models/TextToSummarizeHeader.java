@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 
 public class TextToSummarizeHeader {
     private Integer id;
-    private String idPerdoruesi;
+    private Integer idPerdoruesi;
     private Timestamp dataERegjistrimit;
-    private String idLlojiTekstitOutput;
+    private Integer idLlojiTekstitInput;
 
     public Integer getId() {
         return id;
@@ -16,11 +16,11 @@ public class TextToSummarizeHeader {
         this.id = id;
     }
 
-    public String getIdPerdoruesi() {
+    public Integer getIdPerdoruesi() {
         return idPerdoruesi;
     }
 
-    public void setIdPerdoruesi(String idPerdoruesi) {
+    public void setIdPerdoruesi(Integer idPerdoruesi) {
         this.idPerdoruesi = idPerdoruesi;
     }
 
@@ -32,12 +32,12 @@ public class TextToSummarizeHeader {
         this.dataERegjistrimit = dataERegjistrimit;
     }
 
-    public String getIdLlojiTekstitOutput() {
-        return idLlojiTekstitOutput;
+    public Integer getIdLlojiTekstitInput() {
+        return idLlojiTekstitInput;
     }
 
-    public void setIdLlojiTekstitOutput(String idLlojiTekstitOutput) {
-        this.idLlojiTekstitOutput = idLlojiTekstitOutput;
+    public void setIdLlojiTekstitInput(Integer idLlojiTekstitInput) {
+        this.idLlojiTekstitInput = idLlojiTekstitInput;
     }
 
 

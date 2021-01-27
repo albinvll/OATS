@@ -3,6 +3,8 @@ import { MDBCard, MDBCardBody, MDBInput, MDBIcon, MDBBtn } from 'mdbreact';
 import './home.css';
 import axios from 'axios';
 import * as auth from '../../Auth';
+import { ToastsContainer, ToastsContainerPosition, ToastsStore } from 'react-toasts';
+
 
 export class Home extends Component {
 	static displayName = Home.name;
@@ -25,6 +27,7 @@ export class Home extends Component {
 						<MDBInput value={this.state.password} type="password" label="Password" icon="lock" onChange={this.handlePasswordChange}/>
 						<div  className="text-center">
 							<button onClick={(e)=>this.attempLogin(e)} id="login-button">Login</button>
+							<button onClick={(e)=>this.goToRegistration(e)} id="login-button">Register</button>
 						</div>
 					</MDBCardBody>
 				</MDBCard>
@@ -32,9 +35,22 @@ export class Home extends Component {
 			</>
 		);
 	}
+
+	goToRegistration =(event)=>{
+		event.preventDefault();
+		this.props.history.push("/register");
+	}
+
 	attempLogin=async(event)=> {
 		event.preventDefault();
-        console.log("test test");
+		if(!this.state.email || this.state.email?.length <= 0){
+			ToastsStore.error("Please type your email");
+			return;
+		}
+		if(!this.state.password || this.state.password?.length <= 0){
+			ToastsStore.error("Please type your password");
+			return;
+		}
         const response = await axios.post("http://localhost:8080/api/login/",
             {
 				id: null,
@@ -49,6 +65,7 @@ export class Home extends Component {
 			auth.saveUser(response.data.id);
 			this.props.history.push("/");
 		}else{
+			ToastsStore.error("This user does not exist");
 			return;
 		}
 	}
@@ -64,6 +81,7 @@ export class Home extends Component {
 	render () {
 	    return (
 				<>
+					<ToastsContainer store={ToastsStore} position={ToastsContainerPosition.TOP_RIGHT} />
 					{this.loginForm()}
 				</>
 		);
