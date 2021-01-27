@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { MDBTable, MDBTableHead, MDBTableBody, MDBInput, MDBCard, MDBCardBody } from 'mdbreact';
 import "./summarization.css";
+import client from '../../axios';
 
 export class Summarization extends Component {
     static displayName = Summarization.name;
@@ -8,11 +9,25 @@ export class Summarization extends Component {
         summarizations:[
             {
                 id:1,
-                firstThreeWords:"Lorem ipsum dolor...",
+                summarizedText:"Lorem ipsum dolor...",
                 dataERegjistrimit:"01/01/2000"
             }
         ]
     }
+
+    componentDidMount(){
+        this.fillSummarizationTable();
+    }
+
+    fillSummarizationTable = async() =>{
+        const response = client.post("http://localhost:8080/api/summarization/" + localStorage.getItem("userId"));
+        if(response){
+            if(response.data){
+                this.setState({summarizations:response.data});
+            }
+        }
+    }
+    
 
     showSummarizationsList(){
         return(
@@ -32,7 +47,7 @@ export class Summarization extends Component {
                                 this.state.summarizations.length > 0 ? (this.state.summarizations.map((element,key) =>{
                                     return (<tr key={key}>
                                         <td>{element.id}</td>
-                                        <td>{element.firstThreeWords}</td>
+                                        <td>{element.summarizedText}</td>
                                         <td>{element.dataERegjistrimit}</td>
                                         <td><button>View</button></td>
                                     </tr>)

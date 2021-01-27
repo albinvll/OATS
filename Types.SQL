@@ -1,44 +1,44 @@
 CREATE DATABASE OATS_DB
+
 USE OATS_DB
-CREATE TABLE Subscriptions(
-	Id int not null unique IDENTITY,
-	Pershkrimi varchar(max)
-)
 
-CREATE TABLE LlojiTekstit(
-	Id int not null unique IDENTITY,
-	Pershkrimi varchar(max)
-)
+CREATE TABLE Subscriptions (
+	Id INT NOT NULL UNIQUE IDENTITY
+	,Pershkrimi VARCHAR(max)
+	)
 
-CREATE TABLE Perdoruesi(
-	Id int not null unique IDENTITY,
-	Emri varchar(max),
-	Mbiemri varchar(max),
-	Email varchar(max),
-	Password varchar(max),
-	IdSubscription int,
-	FOREIGN KEY(IdSubscription) REFERENCES Subscriptions(Id)
-)
-	
-CREATE TABLE TextToSummarizeHeader(
-	Id int not null unique IDENTITY,
-	IdPerdoruesi int not null,
-	dataERegjistrimit datetime,
-	IdLlojiTekstitInput int,
-	FOREIGN KEY(IdLlojiTekstitInput) REFERENCES LlojiTekstit(Id),
-	FOREIGN KEY(IdPerdoruesi) REFERENCES Perdoruesi(Id)
-)
+CREATE TABLE LlojiTekstit (
+	Id INT NOT NULL UNIQUE IDENTITY
+	,Pershkrimi VARCHAR(max)
+	)
 
-CREATE TABLE TextToSummarizeDetails(
-	Id int not null unique IDENTITY,
-	IdHeader int NOT null,
-	IdLlojiTekstitOutput int,
-	TextToSummarize varchar(max),
-	SummarizedText varchar(max),
-	SummPercentage decimal,
-	Feedback varchar(max) null,
-	FOREIGN KEY(IdHeader) REFERENCES TextToSummarizeHeader(Id),
-	FOREIGN KEY(IdLlojiTekstitOutput) REFERENCES LlojiTekstit(Id)
-)
+CREATE TABLE Perdoruesi (
+	Id INT NOT NULL UNIQUE IDENTITY
+	,Emri VARCHAR(max)
+	,Mbiemri VARCHAR(max)
+	,Email VARCHAR(max)
+	,Password VARCHAR(max)
+	,IdSubscription INT
+	,FOREIGN KEY (IdSubscription) REFERENCES Subscriptions(Id)
+	)
 
+CREATE TABLE TextToSummarizeHeader (
+	Id INT NOT NULL UNIQUE IDENTITY
+	,IdPerdoruesi INT NOT NULL
+	,dataERegjistrimit DATE
+	,IdLlojiTekstitInput INT
+	,FOREIGN KEY (IdLlojiTekstitInput) REFERENCES LlojiTekstit(Id)
+	,FOREIGN KEY (IdPerdoruesi) REFERENCES Perdoruesi(Id)
+	)
 
+CREATE TABLE TextToSummarizeDetails (
+	Id INT NOT NULL UNIQUE IDENTITY
+	,IdHeader INT NOT NULL
+	,IdLlojiTekstitOutput INT
+	,TextToSummarize VARCHAR(max)
+	,SummarizedText VARCHAR(max)
+	,SummPercentage DECIMAL
+	,Feedback VARCHAR(max) NULL
+	,FOREIGN KEY (IdHeader) REFERENCES TextToSummarizeHeader(Id)
+	,FOREIGN KEY (IdLlojiTekstitOutput) REFERENCES LlojiTekstit(Id)
+	)

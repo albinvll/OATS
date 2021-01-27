@@ -45,11 +45,12 @@ export class Home extends Component {
                 idSubscription: null
             }
 		);
-		if(response){
+		if(response && response.data){
 			auth.saveUser(response.data.id);
 			this.props.history.push("/");
+		}else{
+			return;
 		}
-        console.log(response.data)
 	}
 
 	handleEmailChange=(event)=>{
