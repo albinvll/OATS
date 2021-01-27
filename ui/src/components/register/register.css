@@ -1,0 +1,33 @@
+.register-card{
+    width: 85%;
+}
+#register-card-div{
+    margin-top: 20px;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+#subscription-card-div{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.subscription-card{
+    width: 33%;
+    margin: 0 10px 0 10px;
+}
+.subscription-card-paragraph{
+    margin-bottom: 150px;
+}
+.subscription-card-radio-button{
+    margin-bottom: 70px;
+}
+#register-button{
+    margin-top: 15px;
+    background-color: lightskyblue;
+    border: 0;
+    border-radius: 5%;
+    font-size: 20px;
+}

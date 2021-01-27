@@ -1,0 +1,10 @@
+#summarization-div{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.summarization-div-item{
+    width: 45%;
+    margin: 0 10px 0 10px;
+}
