@@ -24,7 +24,7 @@ public class TextToSummarizeController {
     @PostMapping
     @Transactional
     @RequestMapping(value = "/getTable/{idPerdoruesi}")
-    public List<TextToSummarizeTable> login(
+    public List<TextToSummarizeTable> getTables(
             @PathVariable(value = "idPerdoruesi") Integer idPerdoruesi){
         try{
             List<TextToSummarizeTable> table = textToSummarizeService.getTable(null, idPerdoruesi);
