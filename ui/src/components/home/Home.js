@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MDBCard, MDBCardBody, MDBInput, MDBIcon, MDBBtn } from 'mdbreact';
 import './home.css';
 import axios from 'axios';
+import * as auth from '../../Auth';
 
 export class Home extends Component {
 	static displayName = Home.name;
@@ -43,7 +44,11 @@ export class Home extends Component {
                 password: this.state.password,
                 idSubscription: null
             }
-        );
+		);
+		if(response){
+			auth.saveUser(response.data.id);
+			this.props.history.push("/");
+		}
         console.log(response.data)
 	}
 
