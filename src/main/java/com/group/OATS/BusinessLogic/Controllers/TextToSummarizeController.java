@@ -2,12 +2,13 @@ package com.group.OATS.BusinessLogic.Controllers;
 
 import com.group.OATS.DataAccess.Services.TextToSummarizeService;
 import com.group.OATS.Models.TextToSummarizeTable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/summarization")
 public class TextToSummarizeController {
@@ -20,11 +21,11 @@ public class TextToSummarizeController {
     @PostMapping
     @Transactional
     @RequestMapping(value = "/getTable/{idPerdoruesi}")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<TextToSummarizeTable> login(
             @PathVariable(value = "idPerdoruesi") Integer idPerdoruesi){
         try{
-            return textToSummarizeService.getTable(null,idPerdoruesi);
+            List<TextToSummarizeTable> table = textToSummarizeService.getTable(null, idPerdoruesi);
+            return table;
         }catch (Exception e){
             e.printStackTrace();
             return null;

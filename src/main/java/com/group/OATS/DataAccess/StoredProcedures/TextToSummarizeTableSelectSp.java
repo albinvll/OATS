@@ -35,6 +35,7 @@ public class TextToSummarizeTableSelectSp extends StoredProcedure {
         final Map<String, Object> map = new HashMap<>();
         map.put("Id", id);
         map.put("IdPerdoruesi", idPerdoruesi);
-        return (List<TextToSummarizeTable>) super.execute(map).get(RESULT);
+        List<TextToSummarizeTable> textToSummarizeTables = (List<TextToSummarizeTable>) super.execute(map).get(RESULT);
+        return textToSummarizeTables;
     }
 }

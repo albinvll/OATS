@@ -7,10 +7,7 @@ const fetchClient = () => {
     });
 
     function extracted(config) {
-        config.headers["Access-Control-Allow-Headers"] ="X-Requested-With,content-type";
         config.headers["Access-Control-Allow-Origin"]= "*"; 
-        config.headers["Access-Control-Allow-Methods"]= "GET, POST, OPTIONS, PUT, PATCH, DELETE"; 
-        config.headers["Access-Control-Allow-Credentials"]= true; 
     }
 
     instance.interceptors.request.use(config => {

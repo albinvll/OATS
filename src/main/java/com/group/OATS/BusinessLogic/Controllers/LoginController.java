@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/login")
 public class LoginController {

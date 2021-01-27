@@ -20,7 +20,7 @@ export class Summarization extends Component {
     }
 
     fillSummarizationTable = async() =>{
-        const response = client.post("http://localhost:8080/api/summarization/" + localStorage.getItem("userId"));
+        const response = await client.post("http://localhost:8080/api/summarization/getTable/" + 2);
         if(response){
             if(response.data){
                 this.setState({summarizations:response.data});
@@ -47,9 +47,9 @@ export class Summarization extends Component {
                                 this.state.summarizations.length > 0 ? (this.state.summarizations.map((element,key) =>{
                                     return (<tr key={key}>
                                         <td>{element.id}</td>
-                                        <td>{element.summarizedText}</td>
+                                        <td>{this.cutSummarized(element.summarizedText)}</td>
                                         <td>{element.dataERegjistrimit}</td>
-                                        <td><button>View</button></td>
+                                        <td><button onClick={(e)=>this.viewText(e,element.summarizedText)}>View</button></td>
                                     </tr>)
                                 })):<></>
                             }
@@ -58,6 +58,22 @@ export class Summarization extends Component {
                 </MDBCardBody>
             </MDBCard>
         )
+    }
+
+    viewText=(e,summarizedText)=>{
+        this.props.history.push({
+                pathname: "/viewText",
+                state: { text: summarizedText}
+            });
+    }
+
+    cutSummarized(text){
+        let splitText = text.split(" ");
+        if(splitText.length >=3){
+            return(splitText[0] + " " + splitText[1] + " " + splitText[3] + "...");
+        }else{
+            return text + "...";
+        }
     }   
     
     showSummariztionInput(){
